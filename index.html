@@ -1,0 +1,36 @@
+<html lang="en" ng-app="WeatherApp"> 
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>Weather APP</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+		<link rel="stylesheet" href="style.css" />
+		<script src="script.js"></script>		
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	</head>
+	<body>
+		<main class="col-md-5 col-md-offset-3">
+			<h1>Weather Forecast for London</h1>
+		</main>
+		<main class="col-md-5 col-md-offset-3">
+			<div ng-controller="WeatherCtrl">
+				<div class="result main" ng-if="currentResult">
+					<div class="col-lg-6">
+						<img src="climacons-master/SVG/Cloud-{{currentResult.weather[0].main}}.svg" on-error-src="climacons-master/SVG/Cloud.svg">
+					</div>
+					<div class="col-lg-6 temp">
+						<strong>Temperature: {{currentResult.main.temp_min | number:0}}/{{currentResult.main.temp_max | number:0}} &#8451;</strong>
+						<strong>Humidity: {{currentResult.main.humidity}}%</strong>
+					</div>
+				</div>
+
+				<div class="container">
+					<div ng-repeat="list in result.list" ng-if="$index<6" class="dayforcast">
+						<a href="#" ng-click="showForcast($index)"><img class="dayforcast-img" src="climacons-master/SVG/Cloud-{{list.weather[0].main}}.svg" on-error-src="climacons-master/SVG/Cloud.svg">
+						<p><b>{{ list.dt_txt | date:'MM/dd/yyyy'}} - {{ list.dt | date:'EEEE'}}</b></p></a>
+					</div>
+				</div>
+			</div>
+		</main>
+	</body>
+</html>
